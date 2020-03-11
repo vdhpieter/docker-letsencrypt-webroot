@@ -30,7 +30,7 @@ check_freq="${CHECK_FREQ:-30}"
 le_hook() {
     all_links=($(env | grep -oP '^[0-9A-Z_-]+(?=_ENV_LE_RENEW_HOOK)'))
     compose_links=($(env | grep -oP '^[0-9A-Z]+_[a-zA-Z0-9_.-]+_[0-9]+(?=_ENV_LE_RENEW_HOOK)'))
-    
+
     except_links=($(
         for link in ${compose_links[@]}; do
             compose_project=$(echo $link | cut -f1 -d"_")
@@ -40,13 +40,13 @@ le_hook() {
             echo ${compose_name}
         done
     ))
-    
+
     containers=($(
         for link in ${all_links[@]}; do
             [[ " ${except_links[@]} " =~ " ${link} " ]] || echo $link
         done
     ))
-    
+
     for container in ${containers[@]}; do
         command=$(eval echo \$${container}_ENV_LE_RENEW_HOOK)
         command=$(echo $command | sed "s/@CONTAINER_NAME@/${container,,}/g")
@@ -70,15 +70,15 @@ le_renew() {
 
 le_check() {
     cert_file="/etc/letsencrypt/live/$DARRAYS/fullchain.pem"
-    
+
     if [ -f $cert_file ]; then
-    
+
         exp=$(date -d "`openssl x509 -in $cert_file -text -noout|grep "Not After"|cut -c 25-`" +%s)
         datenow=$(date -d "now" +%s)
         days_exp=$[ ( $exp - $datenow ) / 86400 ]
-        
+
         echo "Checking expiration date for $DARRAYS..."
-        
+
         if [ "$days_exp" -gt "$exp_limit" ] ; then
             echo "The certificate is up to date, no need for renewal ($days_exp days left)."
         else

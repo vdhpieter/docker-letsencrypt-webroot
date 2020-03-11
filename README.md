@@ -3,16 +3,12 @@
 
 Letsencrypt cert auto getting and renewal script based on [letsencrypt](https://quay.io/repository/letsencrypt/letsencrypt) base image.
 
-  - [GitHub](https://github.com/kvaps/docker-letsencrypt-webroot)
-  - [DockerHub](https://hub.docker.com/r/kvaps/letsencrypt-webroot/)
-
-## Status
-
-This project is effectively unmaintained. I will do my best to shepherd pull requests, but cannot guarantee a prompt response and do not have bandwidth to address issues or add new features. Please let me know via an issue if you'd be interested in taking ownership of docker-letsencrypt-webroot.
+  - [GitHub](https://github.com/vdhpieter/docker-letsencrypt-webroot)
+  - [DockerHub](https://hub.docker.com/r/vdhpieter/letsencrypt-webroot/)
 
 ## Usage
 
-* First, you need to set up your web server so that it gave the contents of the `/.well-known/acme-challenge` directory properly. 
+* First, you need to set up your web server so that it gave the contents of the `/.well-known/acme-challenge` directory properly.
   Example, for nginx add location for your server:
 ```nginx
     location '/.well-known/acme-challenge' {
@@ -34,7 +30,7 @@ This project is effectively unmaintained. I will do my best to shepherd pull req
      -e 'DOMAINS=example.com www.example.com' \
      -e 'EMAIL=your@email.tld' \
      -e 'WEBROOT_PATH=/tmp/letsencrypt' \
-     kvaps/letsencrypt-webroot
+     vdhpieter/letsencrypt-webroot
 ```
 
 * Configure your app to use certificates in the following path:
@@ -45,8 +41,6 @@ This project is effectively unmaintained. I will do my best to shepherd pull req
   * **Certificate + intermediates**: `/etc/letsencrypt/live/example.com/fullchain.pem`
 
 **NOTE**: You should connect `/etc/letsencrypt` directory fully, because if you connect just `/etc/letsencrypt/live`, then symlinks to your certificates inside it will not work!
-
-
 
 ## Renew hook
 
@@ -85,7 +79,7 @@ nginx:
 
 letsencrypt:
   restart: always
-  image: kvaps/letsencrypt-webroot
+  image: vdhpieter/letsencrypt-webroot
   volumes:
     - /etc/localtime:/etc/localtime:ro
     - /var/run/docker.sock:/var/run/docker.sock
@@ -99,8 +93,8 @@ letsencrypt:
     - WEBROOT_PATH=/tmp/letsencrypt
     - EXP_LIMIT=30
     - CHECK_FREQ=30
-    - CHICKENEGG=
-    - STAGING=
+    - CHICKENEGG=1
+    - STAGING=0
 ```
 
 ## Once run
