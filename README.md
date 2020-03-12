@@ -1,10 +1,14 @@
 # Let’s Encrypt (webroot) in a Docker
 ![Letsencrypt Logo](https://letsencrypt.org/images/letsencrypt-logo-horizontal.svg)
 
-Letsencrypt cert auto getting and renewal script based on [letsencrypt](https://quay.io/repository/letsencrypt/letsencrypt) base image.
+Letsencrypt cert auto getting and renewal script based on [certbot](https://hub.docker.com/r/certbot/certbot/) base image.
 
   - [GitHub](https://github.com/vdhpieter/docker-letsencrypt-webroot)
   - [DockerHub](https://hub.docker.com/r/vdhpieter/letsencrypt-webroot/)
+  
+## Contribute
+
+I took over this project from [@kvaps](https://github.com/kvaps). I'm not a docker or open source expert but will do all I can to look at issues & PR's. Help is greatly appreciated!
 
 ## Usage
 
