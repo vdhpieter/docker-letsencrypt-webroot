@@ -1,0 +1,20 @@
+name: Email notifier
+on:
+  issue_comment:
+    types: [created]
+  issues:
+    types: [opened, reopend]
+  pull_request:
+    types: [opened, reopend]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@master
+    - name: Send Email
+      uses: peter-evans/sendgrid-action@v1
+      env:
+          SENDGRID_API_KEY: "${{ secrets.SENDGRID_TOKEN }}"
+          RECEIVER_MAIL: "${{ secrets.RECEIVER_MAIL }}"
