@@ -1,16 +1,16 @@
 #!/bin/bash
 
-if [ -z "$DOMAINS" ] ; then
+if [[ -z $DOMAINS ]]; then
   echo "No domains set, please fill -e 'DOMAINS=example.com www.example.com'"
   exit 1
 fi
 
-if [ -z "$EMAIL" ] ; then
+if [[ -z $EMAIL ]]; then
   echo "No email set, please fill -e 'EMAIL=your@email.tld'"
   exit 1
 fi
 
-if [ -z "$WEBROOT_PATH" ] ; then
+if [[ -z $WEBROOT_PATH ]]; then
   echo "No webroot path set, please fill -e 'WEBROOT_PATH=/tmp/letsencrypt'"
   exit 1
 fi
@@ -71,7 +71,7 @@ le_renew() {
 le_check() {
     cert_file="/etc/letsencrypt/live/$DARRAYS/fullchain.pem"
 
-    if [ -f $cert_file ]; then
+    if [[ -e $cert_file ]]; then
 
         exp=$(date -d "`openssl x509 -in $cert_file -text -noout|grep "Not After"|cut -c 25-`" +%s)
         datenow=$(date -d "now" +%s)
