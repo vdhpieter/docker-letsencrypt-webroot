@@ -15,7 +15,7 @@ if [ -z "$WEBROOT_PATH" ] ; then
   exit 1
 fi
 
-if [[ -z $STAGING ]]; then
+if [[ $STAGING -eq 1 ]]; then
   echo "Using the staging environment"
   ADDITIONAL="--staging"
 fi
