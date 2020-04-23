@@ -115,5 +115,5 @@ With this option a container will exited right after certificates update.
 * **CHMOD** Permissions for certs. Defaults to `644`.
 * **EXP_LIMIT** The number of days before expiration of the certificate before request another one. Defaults to `30`.
 * **CHECK_FREQ**: The number of days how often to perform checks. Defaults to `30`.
-* **CHICKENEGG**: Set this to 1 to generate a self signed certificate before attempting to start the process with no previous certificate. Some http servers (nginx) might not start up without a certificate file present.
+* **CHICKENEGG**: Set this to 1 to generate a self signed certificate before attempting to start the process with no previous certificate. Some http servers (nginx) might not start up without a certificate file present. Defaults to `1`.
 * **STAGING**: Set this to 1 to use the staging environment of letsencrypt to prevent rate limiting while working on your setup. Defaults to `0`.
